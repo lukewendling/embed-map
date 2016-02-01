@@ -15,12 +15,20 @@ map via postMessage() calls to an iframe. See the example in test/demo.html
 
 ```
 npm install
+bower install
 ```
 
 ### Run
 
 ```
 npm run dev
+```
+
+### Docker
+
+```
+docker build --no-cache --force-rm -t embed-map .
+docker run -it --rm -p 3000:3000 --name mymap embed-map
 ```
 
 ### Browsers
