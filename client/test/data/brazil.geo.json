@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.3613558,
+          -8.8044875
+        ]
+      },
+      "properties": {
+        "Ordem": "193",
+        "Eixo": "Leste",
+        "Meta": "1L",
+        "Municipio": "Petrolândia",
+        "Estado": "PE",
+        "Nome da Comunidade": "Agrovila 4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -38.3445892,
+          -8.7940031
+        ]
+      },
+      "properties": {
+        "Ordem": "194",
+        "Eixo": "Leste",
+        "Meta": "1L",
+        "Municipio": "Petrolândia / Floresta",
+        "Estado": "PE",
+        "Nome da Comunidade": "Agrovila 5"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.8521847,
+          -8.6774657
+        ]
+      },
+      "properties": {
+        "Ordem": "195",
+        "Eixo": "Leste",
+        "Meta": "1L",
+        "Municipio": "InajÃ¡/Ibimirim",
+        "Estado": "PE",
+        "Nome da Comunidade": "Indígena KambiwÃ¡ - Baxa da Alexandra"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -37.9229577,
+          -8.645232
+        ]
+      },
+      "properties": {
+        "Ordem": "196",
+        "Eixo": "Leste",
+        "Meta": "1L",
+        "Municipio": "InajÃ¡",
+        "Estado": "PE",
+        "Nome da Comunidade": "Indígena KambiwÃ¡ -  BarracÃ£o"
+      }
+    }
+  ]
+}

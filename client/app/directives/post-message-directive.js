@@ -6,16 +6,28 @@ angular.module('myApp')
     window.addEventListener('message', receiveMessage, false);
 
     function receiveMessage(event) {
-      var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+      console.info(event.data)
+      var options = event.data;
+
+      // var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
       // if (origin !== "http://example.org:8080")
       //   return;
 
-      console.info(event.data)
-      angular.extend(scope, {
-        tiles: {
-          url: event.data.tilesUrl
-        }
-      });
+      if (options.tiles) {
+        angular.extend(scope, {
+          tiles: options.tiles
+        });
+      }
+      if (options.geojson || options.geoJson) {
+        angular.extend(scope, {
+          geojson: options.geojson || options.geoJson
+        });
+      }
+      if (options.center) {
+        angular.extend(scope, {
+          center: options.center
+        });
+      }
       scope.$apply();
     }
   }
