@@ -29,6 +29,7 @@ npm run dev
 ```
 docker build --no-cache --force-rm -t embed-map .
 docker run -it --rm -p 3000:3000 --name mymap embed-map
+open http://localhost:3000/test/demo.html
 ```
 
 ### Browsers
