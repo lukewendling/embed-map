@@ -9,6 +9,7 @@
   },
   "main": "server.js",
   "scripts": {
+    "start": "node .",
     "predev": "npm install && bower install",
     "dev": "nodemon . --ext js,json"
   },
