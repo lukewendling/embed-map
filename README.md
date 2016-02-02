@@ -38,6 +38,8 @@ open http://localhost:3000/test/demo.html
 The server (server.js) optionally serves tiles from a filesystem cache.
 A tile server url can be sent to the widget API.
 
+Hint: Create cached tiles with desktop apps like Marble KDE.
+
 ### Browsers
 
 Developed on Chrome.
