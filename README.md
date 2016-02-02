@@ -28,8 +28,9 @@ npm run dev
 ### Docker
 
 ```
-docker build --no-cache --force-rm -t embed-map .
-docker run -it --rm -p 3000:3000 --name mymap embed-map
+# uncomment to build locally
+# docker build --no-cache --force-rm -t lukewendling/embed-map .
+docker run -it --rm -p 3000:3000 --name mymap lukewendling/embed-map
 open http://localhost:3000/test/demo.html
 ```
 
@@ -38,7 +39,7 @@ open http://localhost:3000/test/demo.html
 The server (server.js) optionally serves tiles from a filesystem cache.
 A tile server url can be sent to the widget API.
 
-Hint: Create cached tiles with desktop apps like Marble KDE.
+Hint: First, cache tiles with desktop apps like KDE Marble.
 
 ### Browsers
 
