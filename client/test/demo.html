@@ -27,6 +27,9 @@
     <input id="lat" placeholder="lat" required></input>
     <label>Lng</label>
     <input id="lng" placeholder="lng" required></input>
+    <label>Tiles URL</label>
+    <input id="tiles" placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" required></input>
+    <br>
     <input type="submit" id="show" value="Show on Map"></input>
   </form>
 
@@ -35,33 +38,36 @@
       action = document.getElementById("show"),
       lat = document.getElementById("lat"),
       lng = document.getElementById("lng"),
-      data = document.getElementById("geojson");
+      data = document.getElementById("geojson"),
+      tiles = document.getElementById("tiles");
 
-    window.onload = loadMap;
-
-    action.addEventListener("click", function(e) {
-      e.preventDefault();
-      loadMap({
-        geojson: JSON.parse(data.value),
-        center: {lat: +lat.value, lng: +lng.value, zoom: 10}
-      })
-    });
-
-    function loadMap(options) {
-      options = options || {};
-
-      mapframe.postMessage({
+    window.addEventListener("load", function() {
+      var initial = {
         tiles: {
           url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         },
-        center: options.center || {
+        center: {
           lat: -8.98,
           lng: -38.22,
           zoom: 5
         },
-        geojson: options.geojson || MOCK
-      },
-      "*");
+        geojson: MOCK
+      };
+
+      loadMap(initial);
+    });
+
+    action.addEventListener("click", function(e) {
+      e.preventDefault();
+      loadMap({
+        tiles: {url: tiles.value},
+        geojson: JSON.parse(data.value),
+        center: {lat: +lat.value, lng: +lng.value, zoom: 10}
+      });
+    });
+
+    function loadMap(options) {
+      mapframe.postMessage(options, "*");
     }
   </script>
 

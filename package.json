@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "compression": "^1.6.1",
+    "dotenv": "https://registry.npmjs.org/dotenv/-/dotenv-2.0.0.tgz",
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "serve-static": "^1.10.2"
