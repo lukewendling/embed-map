@@ -5,6 +5,8 @@ angular.module('myApp')
   function link(scope, elem, attrs) {
     window.addEventListener('message', receiveMessage, false);
 
+    // event.data should match options available on leaflet directive
+    // https://github.com/angular-ui/ui-leaflet
     function receiveMessage(event) {
       console.info(event.data)
       var options = event.data;
@@ -13,23 +15,33 @@ angular.module('myApp')
       // if (origin !== "http://example.org:8080")
       //   return;
 
-      if (options.tiles) {
-        angular.extend(scope, {
-          tiles: options.tiles
-        });
-      }
-      if (options.geojson || options.geoJson) {
-        angular.extend(scope, {
-          geojson: options.geojson || options.geoJson
-        });
-      }
-      if (options.center) {
-        angular.extend(scope, {
-          center: options.center
-        });
-      }
+      var geojson = options.geojson;
+      geojson.onEachFeature = onEachFeature; // send marker click to parent
+
+      angular.extend(scope, options);
+
       scope.$apply();
     }
+  }
+
+  function onClick(event) {
+    // console.info(event);
+    var outbound = {
+      feature: event.target.feature,
+      latlng: event.latlng,
+      type: event.type
+    };
+    if (window.parent) {
+      window.parent.postMessage(outbound, '*');
+    } else {
+      console.info('Parent will receive: ', outbound);
+    }
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      click: onClick
+    });
   }
 
   return {
