@@ -31,6 +31,7 @@ npm run dev
 ```
 # uncomment to build locally
 # docker build --no-cache --force-rm -t lukewendling/embed-map .
+docker pull lukewendling/embed-map # always get the latest version
 docker run -it --rm -p 3000:3000 --name mymap lukewendling/embed-map
 open http://localhost:3000/test/demo.html
 ```
