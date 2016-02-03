@@ -15,6 +15,7 @@ map via postMessage() calls to an iframe. See the example in test/demo.html
 ### Install
 
 ```
+cp .env.template .env # modify as needed
 npm install
 bower install
 ```
