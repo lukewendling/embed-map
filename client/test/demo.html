@@ -18,28 +18,30 @@
     scrolling="no" frameborder="0" id="map-frame">
   </iframe>
 
-  <form>
-    <label>GeoJSON</label>
+  <form id="form">
+    <label>GeoJSON **</label>
     <a href="https://gist.githubusercontent.com/lukewendling/41df66addb612496b60f/raw/1aed49f137da70c996400c36bf2d127f2a97dd12/sample.geo.json" target="_blank">See example</a>
-    <textarea style="width:100%; height:200px" id="geojson"
+    <textarea style="width:100%; height:200px" id="geojson-data"
       placeholder="Add GeoJSON data here" required></textarea>
-    <label>Lat</label>
-    <input id="lat" placeholder="lat" required></input>
-    <label>Lng</label>
-    <input id="lng" placeholder="lng" required></input>
-    <label>Tiles URL</label>
-    <input id="tiles" placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" required></input>
+    <label>Lat **</label>
+    <input id="lat" placeholder="30.25" required></input>
+    <label>Lng **</label>
+    <input id="lng" placeholder="-97.75" required></input>
+    <label>Tiles URL (optional)</label>
+    <input id="tiles-url" size="40"
+      placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></input>
     <br>
-    <input type="submit" id="show" value="Show on Map"></input>
+    <input type="submit" id="action" value="Show on Map"></input>
   </form>
 
   <script>
     var mapframe = document.getElementById("map-frame").contentWindow,
-      action = document.getElementById("show"),
+      form = document.getElementById("form"),
+      action = document.getElementById("action"),
       lat = document.getElementById("lat"),
       lng = document.getElementById("lng"),
-      data = document.getElementById("geojson"),
-      tiles = document.getElementById("tiles");
+      geojsonData = document.getElementById("geojson-data"),
+      tiles = document.getElementById("tiles-url");
 
     window.addEventListener("load", function() {
       var initial = {
@@ -58,17 +60,27 @@
 
     });
 
-    action.addEventListener("click", function(e) {
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
-      loadMap({
-        tiles: {url: tiles.value},
-        geojson: JSON.parse(data.value),
+      var msg = {
+        geojson: JSON.parse(geojsonData.value),
         center: {lat: +lat.value, lng: +lng.value, zoom: 10}
-      });
+      };
+      var tilesUrl = tiles.value === "" ? null : tiles.value;
+      if (tilesUrl) msg.tiles = {url: tilesUrl};
+      loadMap(msg);
     });
 
     function loadMap(options) {
+      // post message to widget
       mapframe.postMessage(options, "*");
+    }
+
+    // Get messages back from widget
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event) {
+      console.info("Message from widget: ", event.data);
     }
   </script>
 
