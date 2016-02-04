@@ -5,6 +5,8 @@
 Embed Map is a simple widget that allows users to interact with a Leaflet
 map via postMessage() calls to an iframe. See the example in test/demo.html
 
+[Watch the screencast](https://youtu.be/1DuC1d5ceJg)
+
 ### Benefits
 
 1. Embed Map can be developed independently, using Angular and Node.
