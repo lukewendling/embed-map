@@ -7,8 +7,8 @@ angular.module('myApp')
     //   autoDiscover: true
     // },
     center: {
-      lat: 30.25,
-      lng: -97.75,
+      lat: -8.98,
+      lng: -38.22,
       zoom: 8
     },
     defaults: {

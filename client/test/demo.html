@@ -24,9 +24,9 @@
     <textarea style="width:100%; height:200px" id="geojson-data"
       placeholder="Add GeoJSON data here" required></textarea>
     <label>Lat **</label>
-    <input id="lat" placeholder="30.25" required></input>
+    <input id="lat" placeholder="-8.98" required></input>
     <label>Lng **</label>
-    <input id="lng" placeholder="-97.75" required></input>
+    <input id="lng" placeholder="-38.22" required></input>
     <label>Tiles URL (optional)</label>
     <input id="tiles-url" size="40"
       placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></input>
@@ -64,7 +64,7 @@
       e.preventDefault();
       var msg = {
         geojson: JSON.parse(geojsonData.value),
-        center: {lat: +lat.value, lng: +lng.value, zoom: 10}
+        center: {lat: +lat.value, lng: +lng.value, zoom: 5}
       };
       var tilesUrl = tiles.value === "" ? null : tiles.value;
       if (tilesUrl) msg.tiles = {url: tilesUrl};
