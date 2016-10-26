@@ -16,12 +16,15 @@ map via postMessage() calls to an iframe. See the example in test/demo.html
 
 ### How do I send data to the widget?
 
-Simply send [ui-leaflet](http://angular-ui.github.io/ui-leaflet) options like:
+Simply post messages to the iframe with [ui-leaflet](http://angular-ui.github.io/ui-leaflet) 
+options like this:
 
 ```javascript
-// send keys 'geojson', 'markers', or both. see ui-leaflet examples.
+// get the iframe
 var mapframe = document.getElementById("map-frame").contentWindow
-frame.postMessage({
+
+// send keys 'geojson', 'markers', or both. see ui-leaflet examples.
+mapframe.postMessage({
         tiles: {
           url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         },
