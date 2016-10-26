@@ -14,6 +14,27 @@ map via postMessage() calls to an iframe. See the example in test/demo.html
 1. Embed Map comes with its own http server, to ease local development.
 1. Easily add a map display to hard-to-install, monolithic apps.
 
+### How do I send data to the widget?
+
+Simply send [ui-leaflet](http://angular-ui.github.io/ui-leaflet) options like:
+
+```javascript
+// send keys 'geojson', 'markers', or both. see ui-leaflet examples.
+var mapframe = document.getElementById("map-frame").contentWindow
+frame.postMessage({
+        tiles: {
+          url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        },
+        center: {
+          lat: -8.98,
+          lng: -38.22,
+          zoom: 5
+        },
+        geojson: { ... },
+        markers: { ... }
+      }, '*')
+```
+
 ### Install
 
 ```
