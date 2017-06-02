@@ -6,11 +6,6 @@
   <title>Demo Embed Map</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="stylesheets/main.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script> -->
 </head>
 <body>
   <iframe src="http://localhost:3000/index.html"
@@ -35,23 +30,17 @@
       <textarea style="width:49%; height:200px; display: inline-block; float:right" id="marker-data"
                 placeholder="Add Marker data here"></textarea>
     </div>
-    <label>Lat **</label>
-    <input id="lat" placeholder="-8.98" required></input>
-    <label>Lng **</label>
-    <input id="lng" placeholder="-38.22" required></input>
     <label>Tiles URL (optional)</label>
     <input id="tiles-url" size="40"
-      placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></input>
+      placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
     <br>
-    <input type="submit" id="action" value="Show on Map"></input>
+    <input type="submit" id="action" value="Show on Map"/>
   </form>
 
   <script>
     const mapframe = document.getElementById("map-frame").contentWindow,
       form = document.getElementById("form"),
       action = document.getElementById("action"),
-      lat = document.getElementById("lat"),
-      lng = document.getElementById("lng"),
       geojsonData = document.getElementById("geojson-data"),
       markerData = document.getElementById("marker-data"),
       tiles = document.getElementById("tiles-url");
@@ -72,10 +61,9 @@
       e.preventDefault();
       const msg = {
         geojson: geojsonData.value !=""?JSON.parse(geojsonData.value):{},
-        markers: markerData.value != ""?JSON.parse(markerData.value):{},
-        center: {lat: +lat.value, lng: +lng.value, zoom: 5}
+        markers: markerData.value != ""?JSON.parse(markerData.value):{}
       };
-      var tilesUrl = tiles.value === "" ? null : tiles.value;
+      const tilesUrl = tiles.value === "" ? null : tiles.value;
       if (tilesUrl) msg.tiles = {url: tilesUrl};
       loadMap(msg);
     });
@@ -95,7 +83,7 @@
 
   <script>
   // mock data
-  var MOCK = {
+  const MOCK = {
     "data": {
       "type": "FeatureCollection",
       "features": [
