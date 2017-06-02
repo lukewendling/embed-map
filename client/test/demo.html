@@ -6,11 +6,6 @@
   <title>Demo Embed Map</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="stylesheets/main.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script> -->
 </head>
 <body>
   <iframe src="http://localhost:3000/index.html"
@@ -19,39 +14,41 @@
   </iframe>
 
   <form id="form">
-    <label>GeoJSON **</label>
-    <a href="https://gist.githubusercontent.com/lukewendling/41df66addb612496b60f/raw/1aed49f137da70c996400c36bf2d127f2a97dd12/sample.geo.json" target="_blank">See example</a>
-    <textarea style="width:100%; height:200px" id="geojson-data"
-      placeholder="Add GeoJSON data here" required></textarea>
-    <label>Lat **</label>
-    <input id="lat" placeholder="-8.98" required></input>
-    <label>Lng **</label>
-    <input id="lng" placeholder="-38.22" required></input>
+    <div style="width:100%; height:20px" >
+      <div style="width:50%; height:20px; display: inline-block;">
+        <label for="geojson-data">GeoJSON **</label>
+        <a href="https://gist.githubusercontent.com/lukewendling/41df66addb612496b60f/raw/1aed49f137da70c996400c36bf2d127f2a97dd12/sample.geo.json" target="_blank">See example</a>
+      </div>
+      <div style="width:49%; height:20px; display: inline-block; float:right">
+        <label for="marker-data">Marker **</label>
+        <a href="https://gist.githubusercontent.com/justinlueders/b9c9e381431a0ac68544fc106e018403/raw/49dfa7fb7939174bf7504d4b71636ed55c625b15/marker_data" target="_blank">See example</a>
+      </div>
+    </div>
+    <div style="width:100%; height:200px; padding-bottom: 10px" >
+      <textarea style="width:50%; height:200px; display: inline-block;" id="geojson-data"
+                placeholder="Add GeoJSON data here"></textarea>
+      <textarea style="width:49%; height:200px; display: inline-block; float:right" id="marker-data"
+                placeholder="Add Marker data here"></textarea>
+    </div>
     <label>Tiles URL (optional)</label>
     <input id="tiles-url" size="40"
-      placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></input>
+      placeholder="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
     <br>
-    <input type="submit" id="action" value="Show on Map"></input>
+    <input type="submit" id="action" value="Show on Map"/>
   </form>
 
   <script>
-    var mapframe = document.getElementById("map-frame").contentWindow,
+    const mapframe = document.getElementById("map-frame").contentWindow,
       form = document.getElementById("form"),
       action = document.getElementById("action"),
-      lat = document.getElementById("lat"),
-      lng = document.getElementById("lng"),
       geojsonData = document.getElementById("geojson-data"),
+      markerData = document.getElementById("marker-data"),
       tiles = document.getElementById("tiles-url");
 
     window.addEventListener("load", function() {
-      var initial = {
+      const initial = {
         tiles: {
           url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        },
-        center: {
-          lat: -8.98,
-          lng: -38.22,
-          zoom: 5
         },
         geojson: MOCK
       };
@@ -62,11 +59,11 @@
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
-      var msg = {
-        geojson: JSON.parse(geojsonData.value),
-        center: {lat: +lat.value, lng: +lng.value, zoom: 5}
+      const msg = {
+        geojson: geojsonData.value !=""?JSON.parse(geojsonData.value):{},
+        markers: markerData.value != ""?JSON.parse(markerData.value):{}
       };
-      var tilesUrl = tiles.value === "" ? null : tiles.value;
+      const tilesUrl = tiles.value === "" ? null : tiles.value;
       if (tilesUrl) msg.tiles = {url: tilesUrl};
       loadMap(msg);
     });
@@ -86,7 +83,7 @@
 
   <script>
   // mock data
-  var MOCK = {
+  const MOCK = {
     "data": {
       "type": "FeatureCollection",
       "features": [

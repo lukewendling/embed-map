@@ -1,10 +1,10 @@
 require('dotenv').load({silent: true});
-var compression = require('compression');
-var express = require('express');
-var serveStatic = require('serve-static');
-var app = express();
-var tilesPath = process.env.TILES_PATH;
-var port = process.env.PORT || 3000;
+const compression = require('compression');
+const express = require('express');
+const serveStatic = require('serve-static');
+const app = express();
+const tilesPath = process.env.TILES_PATH;
+const port = process.env.PORT || 3000;
 
 app.use(compression());
 
@@ -16,12 +16,12 @@ if (tilesPath) {
   app.use('/tiles', serveStatic(tilesPath));
 }
 
-app.set('views', './client/app/templates')
+app.set('views', './client/app/templates');
 app.set('view engine', 'jade');
 
 // render Angular templates
 app.get('/templates/:template', (req, res) => {
-  var template = req.params.template;
+  const template = req.params.template;
   res.render(template, {});
 });
 
