@@ -8,25 +8,26 @@ angular.module('myApp')
     // event.data should match options available on leaflet directive
     // https://github.com/angular-ui/ui-leaflet
     function receiveMessage(event) {
-      console.info(event.data)
-      var options = event.data;
+      console.info(event.data);
+      const options = event.data;
 
       // var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
       // if (origin !== "http://example.org:8080")
       //   return;
 
-      var geojson = options.geojson;
+      const geojson = options.geojson;
       geojson.onEachFeature = onEachFeature; // send marker click to parent
 
       angular.extend(scope, options);
 
       scope.$apply();
+
     }
   }
 
   function onClick(event) {
     // console.info(event);
-    var outbound = {
+    const outbound = {
       feature: event.target.feature,
       latlng: event.latlng,
       type: event.type

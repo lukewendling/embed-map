@@ -19,10 +19,22 @@
   </iframe>
 
   <form id="form">
-    <label>GeoJSON **</label>
-    <a href="https://gist.githubusercontent.com/lukewendling/41df66addb612496b60f/raw/1aed49f137da70c996400c36bf2d127f2a97dd12/sample.geo.json" target="_blank">See example</a>
-    <textarea style="width:100%; height:200px" id="geojson-data"
-      placeholder="Add GeoJSON data here" required></textarea>
+    <div style="width:100%; height:20px" >
+      <div style="width:50%; height:20px; display: inline-block;">
+        <label for="geojson-data">GeoJSON **</label>
+        <a href="https://gist.githubusercontent.com/lukewendling/41df66addb612496b60f/raw/1aed49f137da70c996400c36bf2d127f2a97dd12/sample.geo.json" target="_blank">See example</a>
+      </div>
+      <div style="width:49%; height:20px; display: inline-block; float:right">
+        <label for="marker-data">Marker **</label>
+        <a href="https://gist.githubusercontent.com/justinlueders/b9c9e381431a0ac68544fc106e018403/raw/49dfa7fb7939174bf7504d4b71636ed55c625b15/marker_data" target="_blank">See example</a>
+      </div>
+    </div>
+    <div style="width:100%; height:200px; padding-bottom: 10px" >
+      <textarea style="width:50%; height:200px; display: inline-block;" id="geojson-data"
+                placeholder="Add GeoJSON data here"></textarea>
+      <textarea style="width:49%; height:200px; display: inline-block; float:right" id="marker-data"
+                placeholder="Add Marker data here"></textarea>
+    </div>
     <label>Lat **</label>
     <input id="lat" placeholder="-8.98" required></input>
     <label>Lng **</label>
@@ -35,23 +47,19 @@
   </form>
 
   <script>
-    var mapframe = document.getElementById("map-frame").contentWindow,
+    const mapframe = document.getElementById("map-frame").contentWindow,
       form = document.getElementById("form"),
       action = document.getElementById("action"),
       lat = document.getElementById("lat"),
       lng = document.getElementById("lng"),
       geojsonData = document.getElementById("geojson-data"),
+      markerData = document.getElementById("marker-data"),
       tiles = document.getElementById("tiles-url");
 
     window.addEventListener("load", function() {
-      var initial = {
+      const initial = {
         tiles: {
           url: "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        },
-        center: {
-          lat: -8.98,
-          lng: -38.22,
-          zoom: 5
         },
         geojson: MOCK
       };
@@ -62,8 +70,9 @@
 
     form.addEventListener("submit", function(e) {
       e.preventDefault();
-      var msg = {
-        geojson: JSON.parse(geojsonData.value),
+      const msg = {
+        geojson: geojsonData.value !=""?JSON.parse(geojsonData.value):{},
+        markers: markerData.value != ""?JSON.parse(markerData.value):{},
         center: {lat: +lat.value, lng: +lng.value, zoom: 5}
       };
       var tilesUrl = tiles.value === "" ? null : tiles.value;

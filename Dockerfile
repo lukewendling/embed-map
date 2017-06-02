@@ -11,7 +11,7 @@ RUN git config --global user.name "John Smith" && \
 RUN mkdir /app
 WORKDIR /app
 
-RUN git clone --depth 1 https://github.com/lukewendling/embed-map.git
+RUN git clone --depth 1 https://github.com/Sotera/embed-map.git
 
 WORKDIR /app/embed-map
 RUN npm install -g bower
